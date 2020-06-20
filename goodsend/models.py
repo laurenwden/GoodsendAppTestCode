@@ -10,7 +10,7 @@ from flask_login import UserMixin
 
 @login.user_loader
 def load_user(user_id):
-    return User.query.get(int(user_id))
+    return Waitlist.query.get(int(user_id))
 
 class Waitlist(db.Model,UserMixin):
     id = db.Column(db.Integer, primary_key = True)

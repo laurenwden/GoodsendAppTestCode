@@ -14,7 +14,16 @@ stripe.api_key = os.environ.get('STRIPE_KEY')
 @app.route('/')
 def home():
     balance = stripe.Balance.retrieve()
-    return render_template("home.html", balance = balance)
+    registered = Waitlist.query.all()
+    count = 0
+    users = 1
+    current = current_user.id
+    users_before = current - users
+# while users_before < current:
+#     users_before += 1
+    for user in registered:
+        count += 1
+    return render_template("home.html", balance = balance, count = count, users_before = users_before)
 
 #Register Route
 @app.route('/register', methods=['GET','POST'])
@@ -48,7 +57,7 @@ def login():
     if request.method == 'POST' and form.validate():
         email = form.email.data
         password = form.password.data
-        logged_user = User.query.filter(User.email == email).first()
+        logged_user = Waitlist.query.filter(Waitlist.email == email).first()
         if logged_user and check_password_hash(logged_user.password, password):
             login_user(logged_user)
             print("logged in")
