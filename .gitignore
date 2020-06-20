@@ -2,3 +2,4 @@ goodsend_env/
 __pycache__/
 .vscode/
 .env
+config.py
