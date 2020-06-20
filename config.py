@@ -14,5 +14,5 @@ class Config():
     MAIL_USERNAME = 'apikey'
     MAIL_PASSWORD = os.environ.get('SENDGRID_API_KEY')
     MAIL_DEFAULT_SENDER = os.environ.get('MAIL_DEFAULT_SENDER')
-    ADMIN_SECRET_KEY = 'mysecret'
-    STRIPE_KEY="pk_test_51GuK50IwpqcDz3uJcEYj71MklPtJq1xuSrwxC0niycWdvVWVCVmjqtcmq3RuSOpSFpTjnkx6ntErdP28odmQI6N100lx89ACDl"
+
+    
