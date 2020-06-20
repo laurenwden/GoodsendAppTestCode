@@ -1,9 +1,24 @@
-body {
+
+html, body {
+    height: 100%;
+  }
+  body {
+    display: flex;
+    flex-direction: column;
     background-color: #8EB6DC ;
     color:#fff;
-
-
-}
+  }
+  .content {
+    flex: 1 0 auto;
+    padding-bottom:50px;
+  }
+  .footer {
+    flex-shrink: 0;
+    background:#fff;
+    color: #333;
+    padding:50px;
+    text-align:center;
+  }
 
 fieldset {
     font-size: calc(0vw +  1.5rem) !important;
@@ -20,14 +35,25 @@ fieldset {
     margin-top:20px;
 }
 
+.foot {
+    background:#fff;
+    color: #333;
+    padding:50px;
+    text-align:center;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+
 .button :hover {
     border: #1470af important;
 }
 
 .goodsend-nav {
-    background-color: #8EB6DC;
+   background-color: #8EB6DC;
     padding: 4vh;
-    font-size:16px;
+    font-size:16px; 
 }
 
 a{
@@ -53,5 +79,51 @@ ul {
 
 .navbar-brand {
     padding:0px;
+    height:0px;
 }
 
+.collapse {
+    display: none;
+}
+
+.logo {
+    width: auto;
+    max-width: 100%;
+    max-height: 105px;
+}
+/*NAVBAR TRY */
+
+@media only screen and (max-width: 600px) {
+    ul {
+      text-align: center;
+      padding:5px;
+    }
+  }
+  @media only screen and (max-width: 600px) {
+    img {
+      margin:0 auto;
+    }
+  }
+  @media only screen and (max-width: 600px) {
+    .goodsend-nav {
+      padding-bottom:0px;
+    }
+  }
+  @media only screen and (max-width: 600px) {
+    h1 {
+      margin-top:0px;
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+  .navbar-brand {
+    padding-left: 30px !important;
+    margin-bottom:20px !important;
+  }
+}
+  
+@media only screen and (max-width: 600px) {
+.nav-item {
+    padding: 50px 20px 0px 0px;
+}
+}

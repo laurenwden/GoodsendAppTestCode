@@ -1,44 +1,50 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container">
-<div class="row">
-    <div class="col-md-3"></div>
-    <div class="col-md-6">
-<h1 class="justify-content-center">Register to become a beneficiary</h1>
+<div class="container content">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <h1 class="justify-content-center">Register to become a beneficiary</h1>
 
-<!-- Signup Form which comes from Flask Route-->
-<form action="" method="post">
-    {{ form.hidden_tag() }}
-    <div class="form-group">
-        <fieldset>
-            {{ form.first_name.label }}
-            {{ form.first_name(class="form-control", placeholder="First Name")}}
-        </fieldset>
-        <fieldset>
-            {{ form.last_name.label }}
-            {{ form.last_name(class="form-control", placeholder="Last Name")}}
-        </fieldset>
-        <fieldset>
-            {{ form.email.label }}
-            {{ form.email(class="form-control", placeholder="Email") }}
-        </fieldset>
-        <fieldset>
-            {{ form.phone_number.label }}
-            {{ form.phone_number(class="form-control", placeholder="Phone Number") }}
-        </fieldset>
-        <fieldset>
-            {{ form.password.label }}
-            {{ form.password(class="form-control", placeholder="Password") }}
-        </fieldset>
-        <fieldset>
-            {{ form.confirm_pass.label }}
-            {{ form.confirm_pass(class="form-control", placeholder="Confirm Password") }}
-        </fieldset>
-        {{ form.submit(class="btn btn-primary button") }}
+            <!-- Signup Form which comes from Flask Route-->
+            <form action="" method="post">
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    <div class="row">
+                    <div class="col-md-6 col-lg-6 col-md-12">
+                    <fieldset>
+                        {{ form.first_name.label }}
+                        {{ form.first_name(class="form-control", placeholder="First Name")}}
+                    </fieldset>
+                </div>
+                <div class="col-md-6 col-lg-6 col-md-12">   
+                    <fieldset>
+                        {{ form.last_name.label }}
+                        {{ form.last_name(class="form-control", placeholder="Last Name")}}
+                    </fieldset>
+                </div>
+            </div> 
+                    <fieldset>
+                        {{ form.email.label }}
+                        {{ form.email(class="form-control", placeholder="Email") }}
+                    </fieldset>
+                    <fieldset>
+                        {{ form.phone_number.label }}
+                        {{ form.phone_number(class="form-control", placeholder="Phone Number") }}
+                    </fieldset>
+                    <fieldset>
+                        {{ form.password.label }}
+                        {{ form.password(class="form-control", placeholder="Password") }}
+                    </fieldset>
+                    <fieldset>
+                        {{ form.confirm_pass.label }}
+                        {{ form.confirm_pass(class="form-control", placeholder="Confirm Password") }}
+                    </fieldset>
+                    {{ form.submit(class="btn btn-primary button") }}
+                </div>
+            </form>
+        </div>
     </div>
-</form>
-</div>
-</div>
 </div>
 {% endblock content %}
