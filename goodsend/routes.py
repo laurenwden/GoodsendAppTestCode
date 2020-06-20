@@ -11,19 +11,21 @@ import stripe
 
 stripe.api_key = os.environ.get('STRIPE_KEY')
 #Home Route
-@app.route('/')
+@app.route('/data')
 def home():
     balance = stripe.Balance.retrieve()
     registered = Waitlist.query.all()
+    active = Onboarded.query.all()
+    active_count = 0
     count = 0
     users = 1
     current = current_user.id
     users_before = current - users
-# while users_before < current:
-#     users_before += 1
     for user in registered:
         count += 1
-    return render_template("home.html", balance = balance, count = count, users_before = users_before)
+    for a in active:
+        active_count += 1
+    return render_template("data.html", balance = balance, count = count, users_before = users_before, active_count = active_count)
 
 #Register Route
 @app.route('/register', methods=['GET','POST'])
@@ -51,7 +53,7 @@ def register():
     return render_template('register.html',form = form)
 
     #Login
-@app.route('/login', methods = ['GET','POST'])
+@app.route('/', methods = ['GET','POST'])
 def login():
     form = LoginForm()
     if request.method == 'POST' and form.validate():
