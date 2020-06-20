@@ -6,12 +6,16 @@ from goodsend.forms import UserInfoForm, LoginForm
 from goodsend.models import User, Waitlist, Approved, check_password_hash
 
 from flask_login import login_required,login_user,current_user,logout_user
+import os
+import stripe
+from config import Config
 
-
+stripe.api_key = os.environ.get('STRIPE_KEY')
 #Home Route
 @app.route('/')
 def home():
-    return render_template("home.html")
+    balance = stripe.Balance.retrieve()
+    return render_template("home.html", balance = balance)
 #Register Route
 @app.route('/register', methods=['GET','POST'])
 def register():
