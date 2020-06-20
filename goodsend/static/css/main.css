@@ -1,10 +1,24 @@
-body {
+
+html, body {
+    height: 100%;
+  }
+  body {
+    display: flex;
+    flex-direction: column;
     background-color: #8EB6DC ;
     color:#fff;
-
-
-}
-
+  }
+  .content {
+    flex: 1 0 auto;
+    padding-bottom:50px;
+  }
+  .footer {
+    flex-shrink: 0;
+    background:#fff;
+    color: #333;
+    padding:50px;
+    text-align:center;
+  }
 
 fieldset {
     font-size: calc(0vw +  1.5rem) !important;
@@ -26,7 +40,9 @@ fieldset {
     color: #333;
     padding:50px;
     text-align:center;
-    margin-top:130px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 
 
@@ -35,9 +51,9 @@ fieldset {
 }
 
 .goodsend-nav {
-    background-color: #8EB6DC;
+   background-color: #8EB6DC;
     padding: 4vh;
-    font-size:16px;
+    font-size:16px; 
 }
 
 a{
@@ -63,12 +79,18 @@ ul {
 
 .navbar-brand {
     padding:0px;
+    height:0px;
 }
 
 .collapse {
     display: none;
 }
 
+.logo {
+    width: auto;
+    max-width: 100%;
+    max-height: 105px;
+}
 /*NAVBAR TRY */
 
 @media only screen and (max-width: 600px) {
@@ -100,5 +122,8 @@ ul {
   }
 }
   
-
-  
+@media only screen and (max-width: 600px) {
+.nav-item {
+    padding: 50px 20px 0px 0px;
+}
+}
