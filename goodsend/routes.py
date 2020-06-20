@@ -16,9 +16,14 @@ def home():
     balance = stripe.Balance.retrieve()
     registered = Waitlist.query.all()
     count = 0
+    users = 1
+    current = current_user.id
+    users_before = current - users
+# while users_before < current:
+#     users_before += 1
     for user in registered:
         count += 1
-    return render_template("home.html", balance = balance, count = count)
+    return render_template("home.html", balance = balance, count = count, users_before = users_before)
 
 #Register Route
 @app.route('/register', methods=['GET','POST'])

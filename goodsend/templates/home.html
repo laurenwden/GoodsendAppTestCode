@@ -3,5 +3,10 @@
 <h1>Login Works</h1>
 <br>
 <h1>${{ balance['available'][0]['amount'] }}</h1>
+{% if current_user.is_authenticated %}
 <h2>{{ count }} Beneficiaries Registered</h2>
+<h3>{{ users_before }} Are in front of you on the waitlist</h3>
+{% else %}
+<p>Welcome!</p>
+{% endif %}
 {% endblock content %}
