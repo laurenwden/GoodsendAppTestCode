@@ -16,6 +16,7 @@ stripe.api_key = os.environ.get('STRIPE_KEY')
 def home():
     balance = stripe.Balance.retrieve()
     return render_template("home.html", balance = balance)
+    
 #Register Route
 @app.route('/register', methods=['GET','POST'])
 def register():
@@ -56,4 +57,12 @@ def login():
             return redirect(url_for('login'))
 
     return render_template('login.html',form = form)
+
+#Logout
+@app.route('/logout')
+@login_required
+
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
 
