@@ -21,8 +21,6 @@ class User(db.Model,UserMixin):
     phone_number = db.Column(db.String(150), nullable=True, unique=True)   
     password = db.Column(db.String(256), nullable = False)
 
-
-
     def __init__(self,first_name, last_name,email,phone_number, password):
         self.first_name = first_name
         self.last_name = last_name
