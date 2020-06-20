@@ -1,14 +1,57 @@
 body {
     background-color: #8EB6DC ;
     color:#fff;
+
+
 }
 
+fieldset {
+    font-size: calc(0vw +  1.5rem) !important;
+    padding-top: 20px;
+}
+.form-control {
+    border-radius: 0px;
+    padding:2px;
+}
 .button {
     background-color:#1470af !important;
     border-radius: 0%;
     border-color: #1470af;
+    margin-top:20px;
 }
 
 .button :hover {
     border: #1470af important;
 }
+
+.goodsend-nav {
+    background-color: #8EB6DC;
+    padding: 4vh;
+    font-size:16px;
+}
+
+a{
+    color: #fff;
+}
+
+li :hover{
+    color:white;
+    background-color: #8EB6DC !important;
+}
+
+a:active {
+    text-decoration: underline;
+}
+
+ul {
+    list-style-type: none;
+}
+.nav-item {
+    padding:20px 20px 0px 0px;
+
+}
+
+.navbar-brand {
+    padding:0px;
+}
+
