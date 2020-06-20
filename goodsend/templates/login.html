@@ -3,6 +3,9 @@
 {% block content %}
 
 <div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
     <h1>Login</h1>
     <form action="" method="post">
         {{ form.hidden_tag() }}
@@ -15,9 +18,11 @@
                 {{ form.password.label }}
                 {{ form.password(class="form-control", placeholder="Password") }}
             </fieldset>
-            {{ form.submit(class="btn btn-primary") }}
+            {{ form.submit(class="btn btn-primary button") }}
         </div>
     </form>
+</div>
+</div>
 </div>
 
 {% endblock content %}
