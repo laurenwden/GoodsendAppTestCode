@@ -5,6 +5,7 @@ body {
 
 }
 
+
 fieldset {
     font-size: calc(0vw +  1.5rem) !important;
     padding-top: 20px;
@@ -19,6 +20,15 @@ fieldset {
     border-color: #1470af;
     margin-top:20px;
 }
+
+.foot {
+    background:#fff;
+    color: #333;
+    padding:50px;
+    text-align:center;
+    margin-top:130px;
+}
+
 
 .button :hover {
     border: #1470af important;
@@ -55,3 +65,40 @@ ul {
     padding:0px;
 }
 
+.collapse {
+    display: none;
+}
+
+/*NAVBAR TRY */
+
+@media only screen and (max-width: 600px) {
+    ul {
+      text-align: center;
+      padding:5px;
+    }
+  }
+  @media only screen and (max-width: 600px) {
+    img {
+      margin:0 auto;
+    }
+  }
+  @media only screen and (max-width: 600px) {
+    .goodsend-nav {
+      padding-bottom:0px;
+    }
+  }
+  @media only screen and (max-width: 600px) {
+    h1 {
+      margin-top:0px;
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+  .navbar-brand {
+    padding-left: 30px !important;
+    margin-bottom:20px !important;
+  }
+}
+  
+
+  
