@@ -16,7 +16,7 @@ stripe.api_key = os.environ.get('STRIPE_KEY')
 def home():
     balance = stripe.Balance.retrieve()
     return render_template("home.html", balance = balance)
-    
+
 #Register Route
 @app.route('/register', methods=['GET','POST'])
 def register():
