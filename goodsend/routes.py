@@ -3,9 +3,9 @@
 from goodsend import app, db
 from flask import render_template, request, redirect, url_for
 # import forms
-from goodsend.forms import UserInfoForm, CaseForm, LoginForm
+from goodsend.forms import UserInfoForm, LoginForm
 #import models
-from goodsend.models import User, Case, check_password_hash
+from goodsend.models import User, check_password_hash
 
 from flask_login import login_required,login_user,current_user,logout_user
 
@@ -17,11 +17,12 @@ def register():
         # Get Information
         first_name = form.first_name.data
         last_name = form.last_name.data
-        password = form.password.data
         email = form.email.data
-        print("\n",username,password,email)
+        phone_number = form.phone_number.data
+        password = form.password.data
+        print("\n", first_name, last_name, email,phone_number,password)
         # Create an instance of User
-        user = User(username,email,password)
+        user = User(first_name,last_name,email, phone_number, password)
         # Open and insert into database
         db.session.add(user)
         # Save info into database
