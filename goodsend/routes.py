@@ -3,18 +3,18 @@ from flask import render_template, request, redirect, url_for
 # import forms
 from goodsend.forms import UserInfoForm, LoginForm
 #import models
-from goodsend.models import User, Waitlist, Approved, check_password_hash
+from goodsend.models import Waitlist, Onboarded, check_password_hash
 
 from flask_login import login_required,login_user,current_user,logout_user
 import os
 import stripe
-from config import Config
 
 stripe.api_key = os.environ.get('STRIPE_KEY')
 #Home Route
 @app.route('/')
 def home():
     balance = stripe.Balance.retrieve()
+<<<<<<< HEAD
     money = balance['available'][0]['amount']
     count = money
     lst = []
@@ -24,6 +24,10 @@ def home():
             lst.append(i)
             count -= 100
     return render_template("home.html", balance = balance, results = results, money = money, count = count, lst = lst)
+=======
+    return render_template("home.html", balance = balance)
+
+>>>>>>> d029f1ba976de67e8e4c0a9a70b0851bec246bd7
 #Register Route
 @app.route('/register', methods=['GET','POST'])
 def register():
@@ -37,11 +41,12 @@ def register():
         password = form.password.data
         print("\n", first_name, last_name, email,phone_number,password)
         # Create an instance of User
-        user = User(first_name,last_name,email, phone_number, password)
-        # Open and insert into database
-        db.session.add(user)
+        waitlist = Waitlist(first_name,last_name,email, phone_number, password)
+        # Open and insert into waitlist
+        db.session.add(waitlist)
         # Save info into database
         db.session.commit()
+        #Email service funnel for new users
         msg = Message(f'{email} has signed up!', recipients=[email])
         msg.body =('Another user has signed up')
         msg.html = ('<h1> Welcome to Goodsend! </h1>' '<p> Thank you for signing up! </p>')
@@ -64,4 +69,12 @@ def login():
             return redirect(url_for('login'))
 
     return render_template('login.html',form = form)
+
+#Logout
+@app.route('/logout')
+@login_required
+
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
 
