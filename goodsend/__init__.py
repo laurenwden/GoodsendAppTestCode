@@ -16,8 +16,11 @@ app.config.from_object(Config)
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
-admin = Admin(app)
 mail = Mail(app)
+
+
+admin = Admin(app)
+
 
 login = LoginManager(app)
 login.login_view = 'login' # Specify what page to load for NON-authenticated Users
@@ -25,6 +28,8 @@ login.login_view = 'login' # Specify what page to load for NON-authenticated Use
 from goodsend.models import Waitlist, Onboarded
 admin.add_view(ModelView(Waitlist, db.session))
 admin.add_view(ModelView(Onboarded, db.session))
+
+
 
 from goodsend import routes, models
 
