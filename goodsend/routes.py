@@ -3,12 +3,11 @@ from flask import render_template, request, redirect, url_for
 # import forms
 from goodsend.forms import UserInfoForm, LoginForm
 #import models
-from goodsend.models import User, Waitlist, Approved, check_password_hash
+from goodsend.models import Waitlist, Onboarded, check_password_hash
 
 from flask_login import login_required,login_user,current_user,logout_user
 import os
 import stripe
-from config import Config
 
 stripe.api_key = os.environ.get('STRIPE_KEY')
 #Home Route
@@ -29,11 +28,12 @@ def register():
         password = form.password.data
         print("\n", first_name, last_name, email,phone_number,password)
         # Create an instance of User
-        user = User(first_name,last_name,email, phone_number, password)
-        # Open and insert into database
-        db.session.add(user)
+        waitlist = Waitlist(first_name,last_name,email, phone_number, password)
+        # Open and insert into waitlist
+        db.session.add(waitlist)
         # Save info into database
         db.session.commit()
+        #Email service funnel for new users
         msg = Message(f'{email} has signed up!', recipients=[email])
         msg.body =('Another user has signed up')
         msg.html = ('<h1> Welcome to Goodsend! </h1>' '<p> Thank you for signing up! </p>')
@@ -56,4 +56,5 @@ def login():
             return redirect(url_for('login'))
 
     return render_template('login.html',form = form)
+
 
