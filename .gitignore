@@ -1,0 +1,4 @@
+goodsend/
+__pycache__/
+.vscode/
+.env
