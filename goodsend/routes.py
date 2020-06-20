@@ -12,6 +12,7 @@ import stripe
 stripe.api_key = os.environ.get('STRIPE_KEY')
 #Home Route
 @app.route('/data')
+@login_required
 def home():
     balance = stripe.Balance.retrieve()
     registered = Waitlist.query.all()
