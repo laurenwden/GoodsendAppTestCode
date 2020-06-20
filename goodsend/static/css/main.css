@@ -1,0 +1,14 @@
+body {
+    background-color: #8EB6DC ;
+    color:#fff;
+}
+
+.button {
+    background-color:#1470af !important;
+    border-radius: 0%;
+    border-color: #1470af;
+}
+
+.button :hover {
+    border: #1470af important;
+}
