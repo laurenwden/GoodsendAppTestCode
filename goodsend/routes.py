@@ -14,20 +14,12 @@ stripe.api_key = os.environ.get('STRIPE_KEY')
 @app.route('/')
 def home():
     balance = stripe.Balance.retrieve()
-<<<<<<< HEAD
-    money = balance['available'][0]['amount']
-    count = money
-    lst = []
-    results = User.query.all()
-    for i in results:
-        if count > -100:
-            lst.append(i)
-            count -= 100
-    return render_template("home.html", balance = balance, results = results, money = money, count = count, lst = lst)
-=======
-    return render_template("home.html", balance = balance)
+    registered = Waitlist.query.all()
+    count = 0
+    for user in registered:
+        count += 1
+    return render_template("home.html", balance = balance, count = count)
 
->>>>>>> d029f1ba976de67e8e4c0a9a70b0851bec246bd7
 #Register Route
 @app.route('/register', methods=['GET','POST'])
 def register():
@@ -60,7 +52,7 @@ def login():
     if request.method == 'POST' and form.validate():
         email = form.email.data
         password = form.password.data
-        logged_user = User.query.filter(User.email == email).first()
+        logged_user = Waitlist.query.filter(Waitlist.email == email).first()
         if logged_user and check_password_hash(logged_user.password, password):
             login_user(logged_user)
             print("logged in")
