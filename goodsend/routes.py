@@ -15,7 +15,15 @@ stripe.api_key = os.environ.get('STRIPE_KEY')
 @app.route('/')
 def home():
     balance = stripe.Balance.retrieve()
-    return render_template("home.html", balance = balance)
+    money = balance['available'][0]['amount']
+    count = money
+    lst = []
+    results = User.query.all()
+    for i in results:
+        if count > -100:
+            lst.append(i)
+            count -= 100
+    return render_template("home.html", balance = balance, results = results, money = money, count = count, lst = lst)
 #Register Route
 @app.route('/register', methods=['GET','POST'])
 def register():
