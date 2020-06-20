@@ -1,15 +1,15 @@
 from goodsend import app, db, Message, mail
 from flask import render_template, request, redirect, url_for
-# import forms
 from goodsend.forms import UserInfoForm, LoginForm
 #import models
 from goodsend.models import Waitlist, Onboarded, check_password_hash
-
 from flask_login import login_required,login_user,current_user,logout_user
 import os
 import stripe
 
 stripe.api_key = os.environ.get('STRIPE_KEY')
+
+
 #Home Route
 @app.route('/data')
 def home():
@@ -52,28 +52,33 @@ def register():
         mail.send(msg)
     return render_template('register.html',form = form)
 
+
     #Login
 @app.route('/', methods = ['GET','POST'])
+#Login
+@app.route('/login', methods = ['GET','POST'])
 def login():
     form = LoginForm()
     if request.method == 'POST' and form.validate():
         email = form.email.data
         password = form.password.data
-        logged_user = Waitlist.query.filter(Waitlist.email == email).first()
-        if logged_user and check_password_hash(logged_user.password, password):
-            login_user(logged_user)
-            print("logged in")
-            return redirect(url_for('home'))
+        if form.email.data == "insert_email_address_here" and form.password.data == "password_here":
+            return redirect(url_for('admin.index'))
         else:
-            return redirect(url_for('login'))
-
+            logged_user = Waitlist.query.filter(Waitlist.email == email).first()
+            if logged_user and check_password_hash(logged_user.password, password):
+                login_user(logged_user)
+                print("logged in")
+                return redirect(url_for('home'))
+            else:
+                return redirect(url_for('login'))
     return render_template('login.html',form = form)
 
 #Logout
 @app.route('/logout')
 @login_required
-
 def logout():
     logout_user()
     return redirect(url_for('login'))
+
 
