@@ -1,8 +1,7 @@
 from goodsend import app, db, Message, mail
 from flask import render_template, request, redirect, url_for
 from goodsend.forms import UserInfoForm, LoginForm
-#import models
-from goodsend.models import Waitlist, Onboarded, check_password_hash
+from goodsend.models import Users, check_password_hash
 from flask_login import login_required,login_user,current_user,logout_user
 import os
 import stripe
@@ -26,7 +25,7 @@ def home():
         count += 1
     for a in active:
         active_count += 1
-    return render_template("data.html", balance = balance, count = count, users_before = users_before, active_count = active_count)
+    return render_template("data.html", balance=balance, count=count, users_before=users_before, active_count=active_count)
 
 #Register Route
 @app.route('/register', methods=['GET','POST'])
@@ -41,9 +40,9 @@ def register():
         password = form.password.data
         print("\n", first_name, last_name, email,phone_number,password)
         # Create an instance of User
-        waitlist = Waitlist(first_name,last_name,email, phone_number, password)
+        user = Users(first_name,last_name,email, phone_number, password)
         # Open and insert into waitlist
-        db.session.add(waitlist)
+        db.session.add(user)
         # Save info into database
         db.session.commit()
         #Email service funnel for new users
@@ -53,9 +52,6 @@ def register():
         mail.send(msg)
     return render_template('register.html',form = form)
 
-
-    #Login
-@app.route('/', methods = ['GET','POST'])
 #Login
 @app.route('/login', methods = ['GET','POST'])
 def login():
@@ -66,13 +62,14 @@ def login():
         if form.email.data == "insert_email_address_here" and form.password.data == "password_here":
             return redirect(url_for('admin.index'))
         else:
-            logged_user = Waitlist.query.filter(Waitlist.email == email).first()
+            logged_user = Users.query.filter(Users.email == email).first()
             if logged_user and check_password_hash(logged_user.password, password):
                 login_user(logged_user)
                 print("logged in")
                 return redirect(url_for('home'))
             else:
                 return redirect(url_for('login'))
+
     return render_template('login.html',form = form)
 
 #Logout

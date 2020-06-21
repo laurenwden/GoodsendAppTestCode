@@ -13,21 +13,18 @@ from flask_login import LoginManager
 app = Flask(__name__)
 app.config.from_object(Config)
 
-
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 mail = Mail(app)
 
-
-admin = Admin(app)
-
+admin = Admin(app, template_mode='bootstrap3')
 
 login = LoginManager(app)
 login.login_view = 'login' # Specify what page to load for NON-authenticated Users
 
-from goodsend.models import Waitlist, Onboarded
-admin.add_view(ModelView(Waitlist, db.session))
-admin.add_view(ModelView(Onboarded, db.session))
+from goodsend.models import Users
+admin.add_view(ModelView(Users, db.session))
+
 
 
 
