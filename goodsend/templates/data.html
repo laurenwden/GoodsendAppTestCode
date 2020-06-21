@@ -1,13 +1,39 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Login Works</h1>
-<br>
-<h1>${{ balance['available'][0]['amount'] }}</h1>
-{% if current_user.is_authenticated %}
-<h2>{{ count }} Beneficiaries Registered in the waitlist</h2>
-<h3>{{ users_before }} Are in front of you on the waitlist</h3>
-<h3>{{ active_count }} Users active at Goodsend</h3>
-{% else %}
-<p>Welcome!</p>
-{% endif %}
+<div class="container content">
+    <div class="row portal-padding">
+        <div class="col-md-5 col-lg-5 col-sm-12 ">
+            {% if current_user.is_authenticated %}
+            <table>
+                <tr>
+                    <th>
+                        Your Waitlist Status & Information
+                    </th>
+                </tr>
+                <tr>
+                    <td class="top-td">Total Potential beneficiaries in the waitlist</td>
+                    <td>{{ count }}</td>
+                </tr>
+                <tr>
+                    <td>people in front of you on the waitlist</td>
+                    <td>{{ users_before }}</td>
+                </tr>
+                <tr>
+                    <td>Users active at Goodsend</td>
+                    <td>{{ active_count }}</td>
+                </tr>
+            </table>
+            {% else %}
+            <p>Welcome!</p>
+            {% endif %}
+
+        </div>
+        <div class="col-md-2 col-lg-2 col-sm-12"></div>
+        <div class="col-md-5 col-lg-5 col-sm-12 total-fund-col ">
+
+            <h2 class="total-fund">Fund Total</h1>
+                <h2 class="total-fund">${{ balance['available'][0]['amount'] }}</h1>
+        </div>
+    </div>
+</div>
 {% endblock content %}

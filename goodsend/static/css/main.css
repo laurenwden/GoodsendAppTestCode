@@ -91,6 +91,39 @@ ul {
     max-width: 100%;
     max-height: 105px;
 }
+
+table {
+ width: 100%;
+}
+
+th {
+  font-size:30px;
+  font-family: sans-serif;
+  font-weight:100;
+  letter-spacing: .09rem;
+}
+
+td {
+  padding:20px 0px; 
+  font-size: 20px;
+}
+
+.top-td {
+  padding-top:40px;
+}
+.total-fund-col {
+  padding:70px 30px;
+  text-align: center;
+}
+
+.portal-padding {
+  padding-top:50px;
+}
+
+.total-fund {
+  margin:0px;
+  line-height: 4.6rem;
+}
 /*NAVBAR TRY */
 
 @media only screen and (max-width: 600px) {
