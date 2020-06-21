@@ -54,8 +54,8 @@ def register():
         db.session.add(user)
         # Save info into database
         db.session.commit()
-        #Email service funnel for new users
-        msg = Message(f'{email} has signed up!', recipients=[email])
+        #Email service funnel for new users and 2nd string is admin email
+        msg = Message(f'{email} has signed up!', recipients=[email, 'goodsendtest1@gmail.com'])
         msg.body =('Another user has signed up')
         msg.html = ('<h1> Welcome to Goodsend! </h1>' '<p> Thank you for signing up! </p>')
         mail.send(msg)
