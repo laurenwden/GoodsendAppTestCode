@@ -1,12 +1,24 @@
 from goodsend import app, db, Message, mail
 from flask import render_template, request, redirect, url_for
+from flask_admin import Admin, expose
 from goodsend.forms import UserInfoForm, LoginForm
 from goodsend.models import Users, check_password_hash
+from flask_admin.contrib.sqla import ModelView
 from flask_login import login_required,login_user,current_user,logout_user
 import os
 import stripe
 
 stripe.api_key = os.environ.get('STRIPE_KEY')
+admin_username = os.environ.get('ADMIN_USERNAME')
+admin_password = os.environ.get('ADMIN_PASSWORD')
+
+
+#Logout
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
 
 
 #Home Route
@@ -14,15 +26,12 @@ stripe.api_key = os.environ.get('STRIPE_KEY')
 @login_required
 def home():
     balance = stripe.Balance.retrieve()
-    registered = Waitlist.query.all()
-    active = Onboarded.query.all()
+    active = Users.query.all()
     active_count = 0
     count = 0
     users = 1
     current = current_user.id
     users_before = current - users
-    for user in registered:
-        count += 1
     for a in active:
         active_count += 1
     return render_template("data.html", balance=balance, count=count, users_before=users_before, active_count=active_count)
@@ -53,13 +62,16 @@ def register():
     return render_template('register.html',form = form)
 
 #Login
-@app.route('/login', methods = ['GET','POST'])
+@app.route('/', methods = ['GET','POST'])
 def login():
     form = LoginForm()
     if request.method == 'POST' and form.validate():
         email = form.email.data
         password = form.password.data
-        if form.email.data == "insert_email_address_here" and form.password.data == "password_here":
+        if form.email.data == "admintest123@123.com" and form.password.data == "password123":
+            logged_user = Users.query.filter(Users.email == email).first()
+            login_user(logged_user)
+            print('Logged in!')
             return redirect(url_for('admin.index'))
         else:
             logged_user = Users.query.filter(Users.email == email).first()
@@ -72,11 +84,6 @@ def login():
 
     return render_template('login.html',form = form)
 
-#Logout
-@app.route('/logout')
-@login_required
-def logout():
-    logout_user()
-    return redirect(url_for('login'))
+
 
 
