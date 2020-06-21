@@ -22,6 +22,11 @@
                     <td>Users active at Goodsend</td>
                     <td>{{ active_count }}</td>
                 </tr>
+                {% if is_wait %}
+                <tr>
+                    <td>You are in the waitlist</td>
+                </tr>
+                {% endif %}
             </table>
             {% else %}
             <p>Welcome!</p>

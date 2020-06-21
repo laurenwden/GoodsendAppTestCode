@@ -32,9 +32,11 @@ def home():
     users = 1
     current = current_user.id
     users_before = current - users
+    wait = Users.query.filter_by(id = current_user.id).first()
+    is_wait = wait.waitlist
     for a in active:
         active_count += 1
-    return render_template("data.html", balance=balance, count=count, users_before=users_before, active_count=active_count)
+    return render_template("data.html", balance=balance, count=count, users_before=users_before, active_count=active_count, is_wait = is_wait)
 
 #Register Route
 @app.route('/register', methods=['GET','POST'])
@@ -54,8 +56,8 @@ def register():
         db.session.add(user)
         # Save info into database
         db.session.commit()
-        #Email service funnel for new users
-        msg = Message(f'{email} has signed up!', recipients=[email])
+        #Email service funnel for new users and 2nd string is admin email
+        msg = Message(f'{email} has signed up!', recipients=[email, 'goodsendtest1@gmail.com'])
         msg.body =('Another user has signed up')
         msg.html = ('<h1> Welcome to Goodsend! </h1>' '<p> Thank you for signing up! </p>')
         mail.send(msg)
