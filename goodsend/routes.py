@@ -20,21 +20,39 @@ def logout():
     logout_user()
     return redirect(url_for('login'))
 
-
 #Home Route
 @app.route('/data')
 @login_required
 def home():
     balance = stripe.Balance.retrieve()
+    amount_total = balance["available"][0]["amount"]
+    approved_beneficiaries = Users.query.filter_by(approved = True).all()
+    approved_count = 0
+    for approved in approved_beneficiaries:
+        approved_count += 1
+    if approved_count <= 0:
+        dollar_amount = 0
+    else:
+        dollar_amount = amount_total / approved_count
     active = Users.query.all()
     active_count = 0
     count = 0
     users = 1
     current = current_user.id
     users_before = current - users
+    status = Users.query.filter_by(id = current_user.id).first()
+    waitlst = Users.query.filter_by(waitlist = True).all()
+    queue = Users.query.filter_by(waitlist = True).all()
+    is_wait = status.waitlist
+    is_queue = status.queue
+    is_approved = status.approved
     for a in active:
         active_count += 1
-    return render_template("data.html", balance=balance, count=count, users_before=users_before, active_count=active_count)
+    for i in waitlst:
+        count += 1
+    return render_template("data.html", balance=balance, count=count, users_before=users_before, active_count=active_count, is_wait = is_wait, is_queue = is_queue, is_approved = is_approved, dollar_amount=dollar_amount)
+
+
 
 #Register Route
 @app.route('/register', methods=['GET','POST'])
@@ -54,11 +72,12 @@ def register():
         db.session.add(user)
         # Save info into database
         db.session.commit()
-        #Email service funnel for new users
-        msg = Message(f'{email} has signed up!', recipients=[email])
-        msg.body =('Another user has signed up')
-        msg.html = ('<h1> Welcome to Goodsend! </h1>' '<p> Thank you for signing up! </p>')
-        mail.send(msg)
+        #Email service funnel for new users and 2nd string is admin email
+        #msg = Message(f'{email} has signed up!', recipients=[email, 'goodsendtest1@gmail.com'])
+        #msg.body =('Another user has signed up')
+        #msg.html = ('<h1> Welcome to Goodsend! </h1>' '<p> Thank you for signing up! </p>')
+        #mail.send(msg)
+        print("registered")
     return render_template('register.html',form = form)
 
 #Login

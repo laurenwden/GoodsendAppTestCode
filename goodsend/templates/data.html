@@ -11,16 +11,20 @@
                     </th>
                 </tr>
                 <tr>
-                    <td class="top-td">Total Potential beneficiaries in the waitlist</td>
+                    <td class="top-td">Potential Beneficiaries in the Waitlist</td>
                     <td>{{ count }}</td>
                 </tr>
                 <tr>
-                    <td>people in front of you on the waitlist</td>
+                    <td>Number of People in Front of you on the Waitlist</td>
                     <td>{{ users_before }}</td>
                 </tr>
                 <tr>
-                    <td>Users active at Goodsend</td>
+                    <td>Active Beneficiaries at Goodsend</td>
                     <td>{{ active_count }}</td>
+                </tr>
+                <tr>
+                    <td>Total $$ Amount Per Beneficiary</td>
+                    <td>{{ dollar_amount }}</td>
                 </tr>
             </table>
             {% else %}
