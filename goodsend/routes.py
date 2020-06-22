@@ -97,7 +97,7 @@ def login():
             if logged_user and check_password_hash(logged_user.password, password):
                 login_user(logged_user)
                 print("logged in")
-                return redirect(url_for('home'))
+                return redirect(url_for('portal'))
             else:
                 return redirect(url_for('login'))
 
