@@ -21,36 +21,42 @@ def logout():
     return redirect(url_for('login'))
 
 #Home Route
-@app.route('/data')
+@app.route('/portalhome')
 @login_required
 def home():
-    balance = stripe.Balance.retrieve()
-    amount_total = balance["available"][0]["amount"]
-    approved_beneficiaries = Users.query.filter_by(approved = True).all()
-    approved_count = 0
-    for approved in approved_beneficiaries:
-        approved_count += 1
-    if approved_count <= 0:
-        dollar_amount = 0
-    else:
-        dollar_amount = amount_total / approved_count
-    active = Users.query.all()
-    active_count = 0
-    count = 0
-    users = 1
-    current = current_user.id
-    users_before = current - users
-    status = Users.query.filter_by(id = current_user.id).first()
-    waitlst = Users.query.filter_by(waitlist = True).all()
-    queue = Users.query.filter_by(waitlist = True).all()
-    is_wait = status.waitlist
-    is_queue = status.queue
-    is_approved = status.approved
-    for a in active:
-        active_count += 1
-    for i in waitlst:
-        count += 1
-    return render_template("data.html", balance=balance, count=count, users_before=users_before, active_count=active_count, is_wait = is_wait, is_queue = is_queue, is_approved = is_approved, dollar_amount=dollar_amount)
+    if current_user.waitlist == True:
+        return redirect(url_for('waitlist'))
+    elif current_user.approved == True:
+        return redirect(url_for('login'))
+    return redirect(url_for('login'))
+    
+    
+    # balance = stripe.Balance.retrieve()
+    # amount_total = balance["available"][0]["amount"]
+    # approved_count = 0
+    # for approved in approved_beneficiaries:
+    #     approved_count += 1
+    # if approved_count <= 0:
+    #     dollar_amount = 0
+    # else:
+    #     dollar_amount = amount_total / approved_count
+    # active = Users.query.all()
+    # active_count = 0
+    # count = 0
+    # users = 1
+    # current = current_user.id
+    # users_before = current - users - 1
+    # status = Users.query.filter_by(id = current_user.id).first()
+
+    
+    # is_wait = status.waitlist
+    # is_queue = status.queue
+    # is_approved = Users.query.filter_by(id = current_user.id).first().approved
+    # for a in active:
+    #     active_count += 1
+    # for i in waitlst:
+    #     count += 1
+    # return render_template("portalhome.html", balance=balance, count=count, users_before=users_before, active_count=active_count, is_wait = is_wait, is_queue = is_queue, is_approved = is_approved, dollar_amount=dollar_amount)
 
 
 
@@ -101,8 +107,26 @@ def login():
             else:
                 return redirect(url_for('login'))
 
-    return render_template('login.html',form = form)
-
-
-
+    return render_template('login.html', form=form)
+    
+@app.route('/portal1')
+@login_required
+def waitlist():
+    balance = stripe.Balance.retrieve()
+    amount_total = balance["available"][0]["amount"]
+    active = Users.query.all()
+    active_count = 0
+    count = 0
+    users = 1
+    current = current_user.id
+    users_before = current - users - 1
+    status = Users.query.filter_by(id = current_user.id).first()
+    waitlst = Users.query.filter_by(waitlist = True).all()
+    is_wait = status.waitlist
+    for a in active:
+        active_count += 1
+    for i in waitlst:
+        count += 1
+    return render_template("portal1.html", balance=balance, count=count, users_before=users_before, active_count=active_count, is_wait=is_wait)
+    
 

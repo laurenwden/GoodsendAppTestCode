@@ -7,16 +7,16 @@
             <table>
                 <tr>
                     <th>
-                        Your Waitlist Status & Information
+                    Waitlist Status & Information
                     </th>
                 </tr>
                 <tr>
-                    <td class="top-td">Potential Beneficiaries in the Waitlist</td>
-                    <td>{{ count }}</td>
+                    <td>Current Position in Waitlist</td>
+                    <td>{{ users_before }}</td>
                 </tr>
                 <tr>
-                    <td>Number of People in Front of you on the Waitlist</td>
-                    <td>{{ users_before }}</td>
+                    <td class="top-td">Total Applicants in the Waitlist</td>
+                    <td>{{ count }}</td>
                 </tr>
                 <tr>
                     <td>Active Beneficiaries at Goodsend</td>
@@ -35,7 +35,7 @@
         <div class="col-md-2 col-lg-2 col-sm-12"></div>
         <div class="col-md-5 col-lg-5 col-sm-12 total-fund-col ">
 
-            <h2 class="total-fund">Fund Total</h1>
+            <h2 class="total-fund">Current GoodSend Fund Total:</h1>
                 <h2 class="total-fund">${{ balance['available'][0]['amount'] }}</h1>
         </div>
     </div>
