@@ -34,6 +34,7 @@ class MyModelView(ModelView):
     def is_accessible(self):
         return current_user.is_authenticated
         
+        
 
 admin.add_view(MyModelView(Users, db.session))
 
