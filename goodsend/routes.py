@@ -32,11 +32,16 @@ def home():
     users = 1
     current = current_user.id
     users_before = current - users
-    wait = Users.query.filter_by(id = current_user.id).first()
-    is_wait = wait.waitlist
+    status = Users.query.filter_by(id = current_user.id).first()
+    waitlst = Users.query.filter_by(waitlist = True).all()
+    is_wait = status.waitlist
+    is_queue = status.queue
+    is_approved = status.approved
     for a in active:
         active_count += 1
-    return render_template("data.html", balance=balance, count=count, users_before=users_before, active_count=active_count, is_wait = is_wait)
+    for i in waitlst:
+        count += 1
+    return render_template("data.html", balance=balance, count=count, users_before=users_before, active_count=active_count, is_wait = is_wait, is_queue = is_queue, is_approved = is_approved)
 
 #Register Route
 @app.route('/register', methods=['GET','POST'])

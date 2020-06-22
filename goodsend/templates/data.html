@@ -27,6 +27,16 @@
                     <td>You are in the waitlist</td>
                 </tr>
                 {% endif %}
+                {% if is_queue %}
+                <tr>
+                    <td>You are in the queue</td>
+                </tr>
+                {% endif %}
+                {% if is_approved %}
+                <tr>
+                    <td>You are approved for funds!</td>
+                </tr>
+                {% endif %}
             </table>
             {% else %}
             <p>Welcome!</p>
