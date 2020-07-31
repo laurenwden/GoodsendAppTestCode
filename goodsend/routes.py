@@ -6,9 +6,9 @@ from goodsend.models import Users, check_password_hash
 from flask_admin.contrib.sqla import ModelView
 from flask_login import login_required,login_user,current_user,logout_user
 import os
-import stripe
+# import stripe
 
-stripe.api_key = os.environ.get('STRIPE_KEY')
+# stripe.api_key = os.environ.get('STRIPE_KEY')
 admin_username = os.environ.get('ADMIN_USERNAME')
 admin_password = os.environ.get('ADMIN_PASSWORD')
 
@@ -112,8 +112,8 @@ def login():
 @app.route('/portal1')
 @login_required
 def waitlist():
-    balance = stripe.Balance.retrieve()
-    amount_total = balance["available"][0]["amount"]
+    # balance = stripe.Balance.retrieve()
+    # amount_total = balance["available"][0]["amount"]
     active = Users.query.all()
     active_count = 0
     count = 0
@@ -127,6 +127,6 @@ def waitlist():
         active_count += 1
     for i in waitlst:
         count += 1
-    return render_template("portal1.html", balance=balance, count=count, users_before=users_before, active_count=active_count, is_wait=is_wait)
+    return render_template("portal1.html", count=count, users_before=users_before, active_count=active_count, is_wait=is_wait)
     
 

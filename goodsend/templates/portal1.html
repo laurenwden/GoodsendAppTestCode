@@ -3,12 +3,16 @@
 <div class="container content">
     <div class="row portal-padding">
         <div class="col-md-5 col-lg-5 col-sm-12 ">
-            <!-- {% if current_user.is_authenticated %}
+            {% if current_user.is_authenticated %}
             <table>
                 <tr>
                     <th>
                     Waitlist Status & Information
                     </th>
+                </tr>
+                <tr>
+                    <td>Approval Status:</td>
+                    <td>Waitlist</td>
                 </tr>
                 <tr>
                     <td>Current Position in Waitlist</td>
@@ -27,7 +31,7 @@
                     <td>{{ dollar_amount }}</td>
                 </tr>
             </table>
-            {% else %} -->
+            {% else %}
             <p>Welcome!</p>
             {% endif %}
 
@@ -35,8 +39,8 @@
         <div class="col-md-2 col-lg-2 col-sm-12"></div>
         <div class="col-md-5 col-lg-5 col-sm-12 total-fund-col ">
 
-            <h2 class="total-fund">Current GoodSend Fund Total:</h1>
-                <h2 class="total-fund">${{ balance['available'][0]['amount'] }}</h1>
+            <h2 class="total-fund">Current GoodSend Fund Total:</h2>
+                <!-- <h2 class="total-fund">${{ balance['available'][0]['amount'] }}</h2> -->
         </div>
     </div>
 </div>
